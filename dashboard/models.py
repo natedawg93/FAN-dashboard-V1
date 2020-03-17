@@ -1,4 +1,7 @@
 from django.db import models
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
+
 
 class Campus(models.Model):
     name = models.TextField()
@@ -32,14 +35,22 @@ class Button(models.Model):
     def _get_button_id(self):
         return f'{self.location.campus.name}: {self.location.name}: {self.name}'
 
-        
     button_id = property(_get_button_id)
-
-    # @property
-    # def button_id(self):
-    #     return f'{self.location.campus.name}: {self.location.name}: {self.name}'
     
     def __str__(self):
         return f'{self.location.campus.name}: {self.location.name}: {self.name}'
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        super(Button, self).save(force_insert, force_update, using, update_fields)
+        # send info to channel
+        channel_layer = get_channel_layer()
+        async_to_sync(channel_layer.group_send)(
+            'button_created',
+            {
+                'type': 'button_created.message',
+                'device_id': str(self.name)
+            }
+        )
 
    

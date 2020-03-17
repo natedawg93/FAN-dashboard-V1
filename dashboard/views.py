@@ -38,7 +38,7 @@ def button_list(request):
             for pair in button_latest_set:
                 q_statement |= (Q(name__exact=pair['name']) & Q(time_clicked=pair['max_time_clicked']))
 
-            button_set = Button.objects.filter(q_statement)
+            button_set = Button.objects.filter(q_statement).order_by('-time_clicked')
 
             serializer = ButtonSerializer(button_set, many=True)
             

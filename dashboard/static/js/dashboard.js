@@ -12,11 +12,11 @@ function doPoll() {
                 let src = ''
 
                 if(button.click_type == 0){
-                    anim_type = 'single'
+                    anim_type = 'pattern'
                 }else if (button.click_type == 1){
-                    anim_type = 'double'
+                    anim_type = 'pattern2'
                 }else{
-                    anim_type = 'long'
+                    anim_type = 'pattern3'
                 }
 
                 if(img_name === 'aws'){
@@ -30,7 +30,8 @@ function doPoll() {
                 <div class="card" style="width: 15rem;">
                     <img src=${src} class="card-img-top" style="width:128px;height:128px;">
                     <div class="card-body">
-                        <h5 class="card-title">${button.name}</h5><div class="circleBase pattern"></div>
+                        <h5 class="card-title">${button.name}</h5>
+                        <div class=${anim_type}></div>
                         <table class="table">
                             <tbody class="card-table-body">
                                 <tr>    
@@ -54,9 +55,9 @@ function doPoll() {
                 $('.row').html(card);
             });
         },
-        complete:function(){
-            setTimeout(function(){ doPoll(); }, 3000);
-        },
+        // complete:function(){
+        //     setTimeout(function(){ doPoll(); }, 3000);
+        // },
     });
 }
 doPoll()

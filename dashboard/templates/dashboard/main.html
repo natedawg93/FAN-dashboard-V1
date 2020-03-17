@@ -11,45 +11,57 @@
 
     <style>
         @keyframes cycle_long {
-            from {background-color: red;}
-            to {background-color: yellow;}
+            0% {
+                background:
+                linear-gradient(63deg, rgb(255, 0, 0) 23%, transparent 23%) 7px 0,
+                linear-gradient(63deg, transparent 74%, rgb(255, 0, 0) 78%),
+                linear-gradient(63deg, transparent 34%, rgb(255, 0, 0) 38%, rgb(255, 0, 0) 58%, transparent 62%),#444;
+            }
+            100% {
+                background:
+                linear-gradient(63deg, rgb(255, 255, 0) 23%, transparent 23%) 7px 0,
+                linear-gradient(63deg, transparent 74%, rgb(255, 255, 0) 78%),
+                linear-gradient(63deg, transparent 34%, rgb(255, 255, 0) 38%, rgb(255, 255, 0) 58%, transparent 62%),#444;
+            }
           }
 
-        .circleBase {
-            border-radius: 50%;
-            behavior: url(PIE.htc); /* remove if you don't care about IE8 */
-        }
-        
-        .double {
-            width: 50px;
-            height: 50px;
-            background: greenyellow;
-            border: 2px solid black;
-        }
-        .single {
-            width: 50px;
-            height: 50px;
-            background: red;
-            border: 2px solid #000;
-        }
-        .long {
-            width: 50px;
-            height: 50px;
-            background: red;
-            animation-name: cycle_long;
-            animation-duration: 3s;
-            animation-direction: alternate;
-            border: 2px solid black;
-        }
-
         .pattern{
+            border-radius: 50%;
             width: 50px;
             height: 50px;
             border: 2px solid black;
             background:
-                linear-gradient(63deg, rgb(255, 0, 0) 23%, transparent 23%) 7px 0,
-                linear-gradient(63deg, transparent 74%, rgb(255, 0, 0) 78%),
-                linear-gradient(63deg, transparent 34%, rgb(255, 0, 0) 38%, rgb(255, 0, 0) 58%, transparent 62%),#444;
+                linear-gradient(63deg, rgb(0, 255, 0) 23%, transparent 23%) 7px 0,
+                linear-gradient(63deg, transparent 74%, rgb(0, 255, 0) 78%),
+                linear-gradient(63deg, transparent 34%, rgb(0, 255, 0) 38%, rgb(0, 255, 0) 58%, transparent 62%),#444;
+            background-size: 16px 48px;
+        }
+
+        .pattern2{
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            border: 2px solid black;
+            animation-name: cycle_long;
+            animation-duration: 1.5s;
+            animation-direction: alternate;
+            animation-iteration-count: infinite;
+            animation-fill-mode: none;
+            animation-play-state: running; 
+            background-size: 16px 48px;
+        }
+
+        .pattern3{
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            border: 2px solid black;
+            animation-name: cycle_long;
+            animation-duration: 0.5s;
+            animation-direction: alternate;
+            animation-iteration-count: infinite;
+            animation-fill-mode: none;
+            animation-play-state: running; 
             background-size: 16px 48px;
         }
     </style>
@@ -58,4 +70,17 @@
 
 {% block extrajs %}
 <script  src="{% static 'js/dashboard.js' %}"></script>
+
+<script>
+    var webSocket = new WebSocket('ws://' + window.location.host + '/index/');
+
+        webSocket.onmessage = function(e) {
+            console.log(e.data)
+            doPoll()
+        };
+        
+        webSocket.onclose = function(e) {
+            console.error('Socket closed unexpectedly');
+        };
+</script>
 {% endblock %}
