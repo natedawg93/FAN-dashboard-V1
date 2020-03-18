@@ -1,6 +1,6 @@
 function doPoll() {
     $.ajax({
-        url:  '/api/buttonpost',
+        url:  '/api/buttonjson',
         type:  'get',
         dataType:  'json',
         beforeSend: function (xhr){ 
