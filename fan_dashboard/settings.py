@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     
     'channels',
     'rest_framework',
+    'rest_framework_api_key',
+
     'ajax_demo',
     'dashboard'
 ]
@@ -82,6 +84,12 @@ CHANNEL_LAYERS = {
             "hosts": [('127.0.0.1', 6379)],
         },
     },
+}
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework_api_key.permissions.HasAPIKey",
+    ]
 }
 
 # Database

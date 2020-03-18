@@ -3,6 +3,9 @@ function doPoll() {
         url:  '/api/buttonjson',
         type:  'get',
         dataType:  'json',
+        beforeSend: function (xhr){ 
+            xhr.setRequestHeader('Authorization', 'Api-Key nXfI8xVY.UI0CCFWdocm30M4X0qp0HQAIuLbPI1y3'); 
+        },
         success: function  (data) {
             console.log(data)
             let card = '';
