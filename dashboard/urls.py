@@ -17,6 +17,7 @@ urlpatterns = [
     path('api/button/', views.ButtonAPIView.as_view(),name='api-button'),
     
     path('api/buttonjson/', views.button_list),
+    path('api/buttonpost/', views.button_post),
 ]
 
 if settings.DEBUG:

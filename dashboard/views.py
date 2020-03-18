@@ -27,9 +27,7 @@ class ButtonAPIView(generics.ListCreateAPIView):
     queryset = Button.objects.all()
     serializer_class = ButtonSerializer
 
-@api_view(['GET', 'POST'])
-@csrf_exempt 
-@permission_classes([HasAPIKey])
+@api_view(['GET'])
 def button_list(request):
     if request.is_ajax():
 
@@ -47,28 +45,20 @@ def button_list(request):
             
             return JsonResponse(serializer.data, safe=False)
 
-        elif request.method == 'POST':
-            serializer = ButtonSerializer(data=request.data)
-            if serializer.is_valid():
-                serializer.save()
-                return JsonResponse(serializer.data, status=status.HTTP_201_CREATED, safe=False)
-            return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST, safe=False)
     else:
         raise Http404
 
-    # elif request.method == 'PUT':
-    #     serializer = ButtonSerializer(button, data=request.data)
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return JsonResponse(serializer.data)
-    #     return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# @api_view(['PUT'])
-# def button_patch(request, pk):
-#     try:
-#         button = Button.objects.get(pk=pk)
-#     except Button.DoesNotExist:
-#         return Response(status=status.HTTP_404_NOT_FOUND)
+@api_view(['POST'])
+@csrf_exempt
+@permission_classes([HasAPIKey])
+def button_post(request):
+    if request.method == 'POST':
+        serializer = ButtonSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED, safe=False)
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST, safe=False)
 
 def home(request):
     buttons = Button.objects.all()
