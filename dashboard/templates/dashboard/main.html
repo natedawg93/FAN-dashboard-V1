@@ -12,9 +12,10 @@
 
 {% block extrajs %}
 <script  src="{% static 'js/dashboard.js' %}"></script>
-
+<script type="text/javascript" src='{% static "reconnecting-websocket.min.js" %}'></script>
 <script>
-    var webSocket = new WebSocket('ws://' + window.location.host + '/index/');
+    var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+    var chat_socket = new ReconnectingWebSocket(ws_scheme + '://' + window.location.host + "/chat" + window.location.pathname);
 
         webSocket.onmessage = function(e) {
             console.log(e.data)
