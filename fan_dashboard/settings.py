@@ -25,7 +25,7 @@ SECRET_KEY = '3fb^cfb+tuit&*o5vms+2n8b8jb8b!ygu%4z%wp1(b+j3thdf%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['freshideasfandashboard.herokuapp.com']
 
 
 # Application definition
