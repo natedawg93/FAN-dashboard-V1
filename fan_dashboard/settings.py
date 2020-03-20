@@ -25,7 +25,6 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
-print(os.environ.get('DEBUG_VALUE'))
 
 ALLOWED_HOSTS = ['localhost','freshideasfandashboard.herokuapp.com']
 

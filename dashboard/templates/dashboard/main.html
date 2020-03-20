@@ -23,6 +23,7 @@
         
         webSocket.onclose = function(e) {
             console.error('Socket closed unexpectedly');
+            window.location.reload();
         };
 </script>
 {% endblock %}
