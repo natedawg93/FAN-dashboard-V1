@@ -79,13 +79,22 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 WSGI_APPLICATION = 'fan_dashboard.wsgi.application'
 ASGI_APPLICATION = 'fan_dashboard.routing.application'
 
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'asgi_redis.RedisChannelLayer',
+#         'CONFIG': {
+#             "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+#         },
+#         "ROUTING": "fan_dashboard.routing.application",
+#     },
+# }
+
 CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'asgi_redis.RedisChannelLayer',
-        'CONFIG': {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
             "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
         },
-        "ROUTING": "fan_dashboard.routing.channel_routing",
     },
 }
 
