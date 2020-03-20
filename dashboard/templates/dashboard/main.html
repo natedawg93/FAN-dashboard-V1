@@ -15,7 +15,7 @@
 <script type="text/javascript" src='{% static "reconnecting-websocket.min.js" %}'></script>
 <script>
     var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
-    var chat_socket = new ReconnectingWebSocket(ws_scheme + '://' + window.location.host + "/index/");
+    var webSocket = new ReconnectingWebSocket(ws_scheme + '://' + window.location.host + "/index/");
 
         webSocket.onmessage = function(e) {
             console.log(e.data)
