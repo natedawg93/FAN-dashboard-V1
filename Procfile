@@ -1,1 +1,2 @@
-web: gunicorn fan_dashboard.asgi:asgi_channel -b 0.0.0.0:$PORT -w 4 -k uvicorn.workers.UvicornWorker — forwarded-allow-ips “*”
+web: daphne chat.asgi:channel_layer --port $PORT --bind 0.0.0.0 -v2
+worker: python manage.py runworker -v2
