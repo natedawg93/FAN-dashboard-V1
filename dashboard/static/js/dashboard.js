@@ -21,17 +21,9 @@ function doPoll() {
                 }else{
                     anim_type = 'pattern3'
                 }
-
-                if(img_name === 'aws'){
-                    src = "./static/img/aws_button.png"
-                }else{
-                    src = "./static/img/AT&T_button.png"
-                }
-                
                 
                 card += `
                 <div class="card" style="width: 15rem;">
-                    <img src=${src} class="card-img-top" style="width:128px;height:128px;">
                     <div class="card-body">
                         <h5 class="card-title">${button.name}</h5>
                         <div class=${anim_type}></div>

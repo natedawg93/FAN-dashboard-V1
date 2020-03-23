@@ -1,10 +1,12 @@
 from django.db import models
+from django.contrib.auth.models import User
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
 
 
 class Campus(models.Model):
     name = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.name
@@ -25,17 +27,18 @@ class Button(models.Model):
         (DOUBLE, 'Double'),
         (LONG, 'Long'),
     )
-    # button_id = models.TextField()
+
+    button_id = models.TextField()
     name = models.TextField(max_length = 100)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
     time_clicked = models.DateTimeField(auto_now=True)
     click_type = models.PositiveSmallIntegerField(choices=CLICK_CHOICES)
     battery = models.PositiveSmallIntegerField()
 
-    def _get_button_id(self):
-        return f'{self.location.campus.name}: {self.location.name}: {self.name}'
+    # def _get_button_id(self):
+    #     return f'{self.location.campus.name}: {self.location.name}: {self.name}'
 
-    button_id = property(_get_button_id)
+    # button_id = property(_get_button_id)
     
     def __str__(self):
         return f'{self.location.campus.name}: {self.location.name}: {self.name}'

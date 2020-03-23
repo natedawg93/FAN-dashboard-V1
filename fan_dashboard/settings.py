@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'channels',
     'rest_framework',
     'rest_framework_api_key',
+    'crispy_forms',
 
     'ajax_demo',
     'dashboard'
@@ -168,5 +169,7 @@ STATIC_URL = '/static/'
 # STATICFILES_DIRS = (
 #     os.path.join(BASE_DIR, 'static'),
 # )
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/login'
 
 django_heroku.settings(locals())

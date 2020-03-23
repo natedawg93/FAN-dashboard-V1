@@ -11,6 +11,7 @@
 {% endblock %}
 
 {% block extrajs %}
+{% if user.is_authenticated %}
 <script  src="{% static 'js/dashboard.js' %}"></script>
 <script>
     var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
@@ -26,4 +27,8 @@
             window.location.reload();
         };
 </script>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">login</a>
+{% endif %}
 {% endblock %}

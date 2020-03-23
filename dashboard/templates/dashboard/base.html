@@ -18,10 +18,23 @@
     
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
-          </li>
+          {% if not user.is_authenticated %}
+            <li class="nav-item active"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+          {% endif %}
+        </ul>
       </div>
+
+      <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+          {% if user.is_authenticated %}
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active mr-auto"><a class="nav-link mr-auto" href="{% url 'logout' %}">Logout</a></li>
+            <li class="navbar-text mr-auto">{{user}}</li>
+          {% endif %}
+        </ul>
+    </div>
     </nav>
 
   {% block main %}
