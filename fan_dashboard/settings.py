@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'channels',
     'rest_framework',
     'rest_framework_api_key',
-    'crispy_forms',
 
     'ajax_demo',
     'dashboard'
